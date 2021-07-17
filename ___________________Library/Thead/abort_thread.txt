@@ -1,0 +1,12 @@
+        // Creating instance for mythread() method
+        ExampleofThread obj = new ExampleofThread();
+  
+        // Creating and initializing threads
+        Thread thr = new Thread(new ThreadStart(obj.thread));
+        thr.Start();
+  
+        Console.WriteLine("Thread is abort");
+  
+        // Abort thr thread
+        // Using Abort() method
+        thr.Abort();
