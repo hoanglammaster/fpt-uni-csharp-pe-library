@@ -1,0 +1,5 @@
+                DataGridViewButtonColumn buttonColumn = new DataGridViewButtonColumn();
+                buttonColumn.HeaderText = "Edit";
+                buttonColumn.Name = "Edit";
+                buttonColumn.Text = "Edit";
+                buttonColumn.UseColumnTextForButtonValue = true;

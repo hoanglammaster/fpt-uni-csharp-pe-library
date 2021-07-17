@@ -1,0 +1,17 @@
+            using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbContext"].ConnectionString))
+            {
+                connection.Open();
+                string query = "SELECT corp_name,corp_no FROM corporation WHERE region_no = @RegionId";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("RegionId", regionId);
+                    SqlDataAdapter adapter = new SqlDataAdapter(command);
+                    new SqlCommandBuilder(adapter);
+                    DataTable table = new DataTable();
+                    adapter.Fill(table);
+                    Corp.DataSource = table;
+                    Corp.DataValueField = "corp_no";
+                    Corp.DataTextField = "corp_name";
+                    DataBind();
+
+                }

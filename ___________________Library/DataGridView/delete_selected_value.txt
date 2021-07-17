@@ -1,0 +1,37 @@
+        private void button1_Click(object sender, EventArgs e)
+        {
+            List<int> listCorpNo = new List<int>();
+            foreach(DataGridViewRow rows in dataGridView1.Rows)
+            {
+                DataGridViewCheckBoxCell cell = (DataGridViewCheckBoxCell)rows.Cells[0];
+                if(cell.Value == cell.TrueValue)
+                {
+                    DataGridViewTextBoxCell textBoxCell = (DataGridViewTextBoxCell)rows.Cells[1];
+                    listCorpNo.Add(int.Parse(textBoxCell.Value.ToString()));
+                }
+            }
+            if (listCorpNo.Count == 0)
+            {
+                MessageBox.Show("You must select one no corparation at least");
+            }
+            else 
+            {
+                foreach (int no in listCorpNo)
+                {
+                    using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbContext"].ConnectionString))
+                    {
+                        string query = "DELETE from member where corp_no = @Corp  DELETE FROM corporation WHERE corp_no = @Corp";
+                        connection.Open();
+                        using (SqlCommand command = new SqlCommand(query, connection))
+                        {
+                            command.Parameters.AddWithValue("Corp", no);
+                            command.ExecuteNonQuery();
+                        }
+                    }
+                }
+                
+                initData();
+                MessageBox.Show($"Delete {listCorpNo.Count} corparation(s)");
+            }
+
+        }

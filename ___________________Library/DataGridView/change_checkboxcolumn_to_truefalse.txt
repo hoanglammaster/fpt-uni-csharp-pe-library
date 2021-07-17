@@ -1,0 +1,12 @@
+            DataGridViewTextBoxColumn textBoxColumn = new DataGridViewTextBoxColumn();
+            textBoxColumn.HeaderText = dataGridView1.Columns["Discontinued"].HeaderText;
+            textBoxColumn.ValueType = typeof(bool);
+            textBoxColumn.DataPropertyName = "Discontinued";
+            textBoxColumn.Name = "Discontinued";
+
+
+            //xoa c di; a b
+            dataGridView1.Columns.Remove("Discontinued");
+
+            // add them o vao; a b o
+            dataGridView1.Columns.Add(textBoxColumn);

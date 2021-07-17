@@ -1,0 +1,15 @@
+                using (SqlConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["dbContext"].ConnectionString))
+                {
+                    connection.Open();
+                    string query = "INSERT INTO member([lastname],[firstname],[street],[city],[state_prov],[country],[mail_code],[issue_dt],[expr_dt],[region_no],[corp_no],[member_code])" +
+                        "VALUES(@LastName, @Firstname, '', '', '', '', '', DATEADD(DAY, 1, GETDATE()), DATEADD(MONTH, 6, DATEADD(DAY, 1, GETDATE())), @Region, @Corp, '')";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("LastName", LastName.Text);
+                        command.Parameters.AddWithValue("FirstName", FirstName.Text);
+                        command.Parameters.AddWithValue("Region", int.Parse(Region.SelectedValue));
+                        command.Parameters.AddWithValue("Corp", int.Parse(Corp.SelectedValue));
+                        command.ExecuteNonQuery();
+                        Msg.Text = "Added successful";
+                    }
+                }

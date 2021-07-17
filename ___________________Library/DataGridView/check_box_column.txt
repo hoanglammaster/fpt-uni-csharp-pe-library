@@ -1,0 +1,6 @@
+                 DataGridViewCheckBoxColumn checkBoxColumn = new DataGridViewCheckBoxColumn();
+                checkBoxColumn.HeaderText = "Select";
+                checkBoxColumn.Name = "Select";
+                checkBoxColumn.ValueType = typeof(bool);
+                checkBoxColumn.TrueValue = true;
+                checkBoxColumn.FalseValue = false;

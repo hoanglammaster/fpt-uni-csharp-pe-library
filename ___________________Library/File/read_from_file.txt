@@ -1,0 +1,30 @@
+C1:
+        public void ReadFromFile(string filename)
+        {
+            try
+            {
+                using (var streamReader = new StreamReader(filename))
+                {
+                    string line;
+                    while((line = streamReader.ReadLine()) != null)
+                    {
+                        Employee employee = new Employee();
+                        employee.ReadFromString(line);
+                        listEmp.Add(employee);
+                    }
+                }
+            }catch(Exception e)
+            {
+                Console.WriteLine(e.Message);
+            }
+        }
+
+--------------------------
+C2:
+        // Read the file as one string.
+        string text = System.IO.File.ReadAllText(@"C:\Users\Public\TestFolder\WriteText.txt");
+        ------------------
+	// Read each line of the file into a string array. Each element
+        // of the array is one line of the file.
+        string[] lines = System.IO.File.ReadAllLines(@"C:\Users\Public\TestFolder\WriteLines2.txt");
+--------------------------
