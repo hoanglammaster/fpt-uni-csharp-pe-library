@@ -1,0 +1,43 @@
+Class:
+    public delegate void Notify(float oldValuel, float newValue);
+    public class Food : IFood
+    {
+        public event Notify AmountChanged;
+       
+        private float amount;
+        public float Amount
+        {
+            set
+            {
+                if (AmountChanged != null)
+                {
+                    AmountChanged(amount, value);
+                }
+                amount = value;
+
+            }
+            get
+            {
+                return amount;
+            }
+        }
+        public float ComputeCalory()
+        {
+            return Amount / 100 * 5;
+        }
+
+    }
+
+Program:
+        static void Main(string[] args)
+        {
+            Food f = new Food() { Amount = 1000 };
+            f.AmountChanged += notifyAmountChanged;
+            f.Amount = 990;
+            Console.WriteLine("Calory:" + f.ComputeCalory());
+            Console.ReadLine();
+        }
+        public static void notifyAmountChanged(float oldValue, float newValue)
+        {
+            Console.WriteLine("Amount changed - old value:"+ oldValue + ", new value :"+newValue);
+        }
